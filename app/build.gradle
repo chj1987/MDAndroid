@@ -1,0 +1,70 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "com.cn.ly.mdandroid"
+        minSdkVersion 21
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        //Arouter路由配置
+        javaCompileOptions {
+            annotationProcessorOptions {
+                annotationProcessorOptions { includeCompileClasspath = true }
+                arguments = [moduleName: projects.getName()]
+            }
+        }
+    }
+    buildTypes {
+        debug {
+            buildConfigField("boolean", "LOG_DEBUG", "true")
+            minifyEnabled false
+            useProguard false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguardTest-rules.pro'
+        }
+        release {
+            buildConfigField("boolean", "LOG_DEBUG", "false")
+            minifyEnabled true
+            useProguard true
+            //移除没用的资源文件
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation rootProject.ext.depenDencies.appcompatv7
+    implementation rootProject.ext.depenDencies.cardview
+    implementation rootProject.ext.depenDencies.design
+    implementation rootProject.ext.depenDencies.constraint_layout
+    testImplementation rootProject.ext.depenDencies.junit
+    androidTestImplementation rootProject.ext.depenDencies.runner
+    androidTestImplementation rootProject.ext.depenDencies.espresso_core
+    implementation project(':component_base')
+    if (!rootProject.ext.app) {
+        implementation project(':module_main')
+        implementation project(':module_video')
+    }
+    /*statusView*/
+    implementation rootProject.ext.depenDencies.statusView
+    implementation rootProject.ext.depenDencies.lottie
+    implementation rootProject.ext.depenDencies.bottomNavigationBar
+    implementation rootProject.ext.depenDencies.butterknife
+    implementation rootProject.ext.depenDencies.butterknife_compiler
+    implementation rootProject.ext.depenDencies.circleimageview
+
+    //Arouter路由
+    annotationProcessor rootProject.ext.depenDencies.arouter_compiler
+    implementation rootProject.ext.depenDencies.arouter_api
+}

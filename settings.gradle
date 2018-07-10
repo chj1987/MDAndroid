@@ -1,0 +1,1 @@
+include ':app', ':component_base', ':module_video', ':module_main'

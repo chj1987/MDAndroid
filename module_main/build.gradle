@@ -1,0 +1,83 @@
+if (Boolean.valueOf(rootProject.ext.moduleMain)) {
+    apply plugin: 'com.android.application'
+} else {
+    apply plugin: 'com.android.library'
+}
+apply plugin: 'com.jakewharton.butterknife'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 27
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        //Arouter路由配置
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [moduleName: projects.getName()]
+            }
+        }
+    }
+    buildTypes {
+        debug {
+            buildConfigField("boolean", "LOG_DEBUG", "true")
+            minifyEnabled false
+            useProguard false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguardTest-rules.pro'
+        }
+        release {
+            buildConfigField("boolean", "LOG_DEBUG", "false")
+            minifyEnabled true
+            useProguard true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main {
+            if (rootProject.ext.moduleMain) {
+                manifest.srcFile 'src/main/module/AndroidManifest.xml'
+            } else {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+                java {
+                    exclude '*module'
+                }
+            }
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation rootProject.ext.depenDencies.appcompatv7
+    implementation rootProject.ext.depenDencies.cardview
+    implementation rootProject.ext.depenDencies.design
+    implementation rootProject.ext.depenDencies.constraint_layout
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+    testImplementation rootProject.ext.depenDencies.junit
+    androidTestImplementation rootProject.ext.depenDencies.runner
+    androidTestImplementation rootProject.ext.depenDencies.espresso_core
+    implementation project(':component_base')
+    /*statusView*/
+    implementation rootProject.ext.depenDencies.statusView
+    implementation rootProject.ext.depenDencies.lottie
+    implementation rootProject.ext.depenDencies.bottomNavigationBar
+
+    implementation rootProject.ext.depenDencies.butterknife
+    annotationProcessor rootProject.ext.depenDencies.butterknife_compiler
+
+    implementation rootProject.ext.depenDencies.circleimageview
+
+    //Arouter路由
+    annotationProcessor rootProject.ext.depenDencies.arouter_compiler
+    implementation rootProject.ext.depenDencies.arouter_api
+}

@@ -1,0 +1,96 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.jakewharton.butterknife'
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    defaultConfig {
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        //MultiDex分包方法
+        multiDexEnabled true
+
+        //Arouter路由配置
+        javaCompileOptions {
+            annotationProcessorOptions {
+                annotationProcessorOptions { includeCompileClasspath = true }
+                arguments = [moduleName: projects.getName()]
+            }
+        }
+
+        //防止编译的时候oom、GC
+        dexOptions {
+            javaMaxHeapSize "4g"
+            jumboMode true
+        }
+
+        //解决.9图问题
+        aaptOptions {
+            cruncherEnabled = false
+            useNewCruncher = false
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation rootProject.ext.depenDencies.appcompatv7
+    implementation rootProject.ext.depenDencies.cardview
+    implementation rootProject.ext.depenDencies.design
+    implementation rootProject.ext.depenDencies.constraint_layout
+    testImplementation rootProject.ext.depenDencies.junit
+    androidTestImplementation rootProject.ext.depenDencies.runner
+    androidTestImplementation rootProject.ext.depenDencies.espresso_core
+
+    //MultiDex分包方法
+    implementation rootProject.ext.depenDencies.multidex
+    //Arouter路由
+    annotationProcessor rootProject.ext.depenDencies.arouter_compiler
+    implementation rootProject.ext.depenDencies.arouter_api
+    implementation rootProject.ext.depenDencies.arouter_annotation
+    //网络
+    implementation rootProject.ext.depenDencies.retrofit2
+    implementation rootProject.ext.depenDencies.converter_gson
+    implementation rootProject.ext.depenDencies.adapter_rxjava2
+    implementation rootProject.ext.depenDencies.rxjava2_rxandroid
+    implementation rootProject.ext.depenDencies.rxjava2
+    implementation rootProject.ext.depenDencies.logging_interceptor
+    //黄油刀
+    annotationProcessor rootProject.ext.depenDencies.butterknife_compiler
+    implementation rootProject.ext.depenDencies.butterknife
+
+    implementation rootProject.ext.depenDencies.logger
+
+    //图片
+    implementation rootProject.ext.depenDencies.glide
+    //图片选择器 导致夜神在模拟器打不开
+    // api rootProject.ext.dependencies["PictureSelector"]
+    //图片缩放,View Pager中浏览库
+    implementation rootProject.ext.depenDencies.photoview
+    //仿ios 的PickerView时间选择器和条件选择器
+    implementation rootProject.ext.depenDencies.pickerView
+
+    //eventbus 发布/订阅事件总线
+    implementation rootProject.ext.depenDencies.eventbus
+    //banner轮播图
+    implementation rootProject.ext.depenDencies.banner
+    //RecyclerView万能适配器
+    implementation rootProject.ext.depenDencies.baseRecyclerViewAdapterHelper
+    implementation rootProject.ext.depenDencies.fragmentation
+
+    /*statusView*/
+    implementation rootProject.ext.depenDencies.statusView
+
+}

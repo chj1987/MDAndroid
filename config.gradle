@@ -1,0 +1,143 @@
+ext {
+    app = false
+    moduleVideo = false
+    moduleMain = false
+
+
+    android = [
+            //将项目的一些基本配置写在根目录的gradle文件中，方便统一更改
+            //sdk和tools
+            minSdkVersion           : 21,
+            targetSdkVersion        : 27,
+            compileSdkVersion       : 27,
+            buildToolsVersion       : '27.0.3',
+
+            versionCode             : 1,
+            versionName             : '1.0',
+
+            androidSupportSdkVersion: "27.1.1"
+    ]
+    depsVersion = [
+            multidex                     : '1.0.2',
+            runner                       : '1.0.1',
+            espresso_core                : '3.0.2',
+
+            junit                        : '4.12',
+            constraint_layout            : '1.1.2',
+
+            /* 路由 */
+            arouter_api                  : '1.2.4',
+            arouter_compiler             : '1.1.4',
+            arouter_annotation           : '1.0.4',
+
+            /* eventbus */
+            eventbus                     : '3.0.0',
+
+            /*黄油刀*/
+            butterknife                  : '8.4.0',
+            butterknife_compiler         : '8.4.0',
+
+            /* RxJava & RxAndroid & Retrofit & OkHttp */
+            retrofit2                    : '2.3.0',
+            converter_gson               : '2.3.0',
+            adapter_rxjava2              : '2.3.0',
+
+            rxjava2                      : '2.1.5',
+            rxjava2_rxandroid            : '2.0.1',
+
+            okhttp3                      : '3.9.0',
+
+            /*日志拦截器*/
+            logging_interceptor          : '3.4.1',
+
+            /*图片*/
+            glide                        : '4.5.0',
+            glide_okhttp3                : '4.5.0',
+
+            /*日志*/
+            logger                       : '2.1.1',
+            lottie                       : '1.0.1',
+
+            /*图片缩放*/
+            photoview                    : '1.2.4',
+
+            /*时间,地址,条件选择器*/
+            pickerView                   : '3.2.6',
+            banner                       : '1.4.10',
+
+            /*baseRecyclerViewAdapterHelper*/
+            baseRecyclerViewAdapterHelper: '2.9.22',
+
+            circleimageview              : '2.2.0',
+            fragmentation                : '1.3.4',
+            bottomNavigationBar          : '2.0.2',
+
+            /*statusView*/
+            statusView                   : '1.0.5',
+
+            /*侧滑返回*/
+            swipebacklayout              : '1.1.0'
+    ]
+    depenDencies = [
+            junit                        : 'junit:junit:' + depsVersion.junit,
+            appcompatv7                  : 'com.android.support:appcompat-v7:' + android.androidSupportSdkVersion,
+            cardview                     : 'com.android.support:cardview-v7:' + android.androidSupportSdkVersion,
+            design                       : 'com.android.support:design:' + android.androidSupportSdkVersion,
+
+            constraint_layout            : 'com.android.support.constraint:constraint-layout:' + depsVersion.constraint_layout,
+
+            multidex                     : 'com.android.support:multidex:' + depsVersion.multidex,
+
+            runner                       : 'com.android.support.test:runner:' + depsVersion.runner,
+
+            espresso_core                : 'com.android.support.test.espresso:espresso-core:' + depsVersion.espresso_core,
+            /* 路由 */
+            arouter_api                  : 'com.alibaba:arouter-api:' + depsVersion.arouter_api,
+            arouter_compiler             : 'com.alibaba:arouter-compiler:' + depsVersion.arouter_compiler,
+            arouter_annotation           : 'com.alibaba:arouter-annotation:' + depsVersion.arouter_annotation,
+
+            /* eventbus */
+            eventbus                     : 'org.greenrobot:eventbus:' + depsVersion.eventbus,
+
+            /* View注解 ButterKnife */
+            butterknife                  : 'com.jakewharton:butterknife:' + depsVersion.butterknife,
+            butterknife_compiler         : 'com.jakewharton:butterknife-compiler:' + depsVersion.butterknife_compiler,
+
+            /* RxJava & RxAndroid & Retrofit & OkHttp */
+            rxjava2                      : 'io.reactivex.rxjava2:rxjava:' + depsVersion.rxjava2,
+            rxjava2_rxandroid            : 'io.reactivex.rxjava2:rxandroid:' + depsVersion.rxjava2_rxandroid,
+            retrofit2                    : 'com.squareup.retrofit2:retrofit:' + depsVersion.retrofit2,
+            converter_gson               : 'com.squareup.retrofit2:converter-gson:' + depsVersion.converter_gson,
+            adapter_rxjava2              : 'com.squareup.retrofit2:adapter-rxjava2:' + depsVersion.adapter_rxjava2,
+            okhttp3                      : 'com.squareup.okhttp3:okhttp:' + depsVersion.okhttp3,
+            logging_interceptor          : 'com.squareup.okhttp3:logging-interceptor:' + depsVersion.logging_interceptor,
+
+            /* 图片加载 Glide */
+            glide                        : 'com.github.bumptech.glide:glide:' + depsVersion.glide,
+            glide_okhttp3                : 'com.github.bumptech.glide:okhttp3-integration:' + depsVersion.glide_okhttp3,
+
+            /* Log */
+            logger                       : 'com.orhanobut:logger:' + depsVersion.logger,
+            lottie                       : 'com.airbnb.android:lottie:' + depsVersion.lottie,
+
+            /*图片缩放*/
+            photoview                    : 'com.github.chrisbanes.photoview:library:' + depsVersion.photoview,
+
+            /*时间,地址,条件选择器*/
+            pickerView                   : 'com.contrarywind:Android-PickerView:' + depsVersion.pickerView,
+
+            banner                       : 'com.youth.banner:banner:' + depsVersion.banner,
+
+            /*baseRecyclerViewAdapterHelper*/
+            baseRecyclerViewAdapterHelper: 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.22',
+
+            circleimageview              : 'de.hdodenhof:circleimageview:' + depsVersion.circleimageview,
+            fragmentation                : 'me.yokeyword:fragmentation:' + depsVersion.fragmentation,
+            bottomNavigationBar          : 'com.ashokvarma.android:bottom-navigation-bar:' + depsVersion.bottomNavigationBar,
+            /*statusView*/
+            statusView                   : 'com.yanzhenjie:sofia:' + depsVersion.statusView,
+
+            /*侧滑返回*/
+            swipebacklayout              : 'me.imid.swipebacklayout.lib:library:' + depsVersion.swipebacklayout,
+    ]
+}

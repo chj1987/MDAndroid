@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.tome.module_shop_mall">
+    <!--android:name属性——是用来设置所有activity属于哪个application的，默认是android.app.Application。-->
+    <application
+        android:name="com.cn.ly.module_main.App"
+        android:allowBackup="true"
+        android:label="主页"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name="com.cn.ly.module_main.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
